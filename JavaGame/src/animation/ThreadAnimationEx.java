@@ -71,7 +71,8 @@ public class ThreadAnimationEx extends JFrame{
     	}
     	
     	@Override
-    	public void addNotify() {
+    	public void addNotify() {	//is called after our JPanel has been added to the JFrame component. 
+    								//This method is often used for various initialisation tasks.
     		super.addNotify();
     		
     		animator = new Thread(this);
