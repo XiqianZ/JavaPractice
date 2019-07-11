@@ -11,9 +11,9 @@ import java.awt.geom.Ellipse2D;
 import java.awt.BasicStroke;
 
 
-public class Donut extends JPanel {
+public class DonutShape extends JPanel {
 	
-	public Donut() {}
+	public DonutShape() {}
 
 	public void paintComponent(Graphics g) {
 		super.paintComponents(g);

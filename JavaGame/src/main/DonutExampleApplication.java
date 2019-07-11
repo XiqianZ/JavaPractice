@@ -3,7 +3,7 @@ package main;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 
-import shape.Donut;
+import shape.DonutShape;
 
 public class DonutExampleApplication extends JFrame {
 	
@@ -12,7 +12,7 @@ public class DonutExampleApplication extends JFrame {
 	}
 	
 	private void initUI() {
-		add(new Donut());
+		add(new DonutShape());
 		
 		setSize(330,330);
 		
