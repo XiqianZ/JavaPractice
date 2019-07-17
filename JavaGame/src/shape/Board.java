@@ -2,8 +2,11 @@ package shape;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -87,31 +90,47 @@ public class Board extends JPanel implements ActionListener {
 		List<Missile> ms = spaceship.getMissiles();
 		for (Missile missile : ms) {
 			if(missile.isVisible()) {
-				
+				g.drawImage(missile.getImage(), missile.getX(), missile.getY(),this);
 			}
 		}
+		
+		for (Alien alien : aliens) {
+			if(alien.isVisible()) {
+				g.drawImage(alien.getImage(), alien.getX(), alien.getY(), this);
+			}
+		}
+		
+		g.setColor(Color.WHITE);
+		g.drawString("Aliens left: " + aliens.size(), 5, 15);
+		
 	}
 	
 	private void drawGameOver(Graphics g) {
-		//TODO
-	}
-	
-	private void doDrawing(Graphics g) {
-		Graphics2D g2d=(Graphics2D) g;
-		g2d.drawImage(spaceship.getImage(), spaceship.getX(), spaceship.getY(), this);
+		String msg = "Game Over";
+		Font small = new Font("Helvetica", Font.BOLD, 14);
+		FontMetrics fm=getFontMetrics(small);
 		
-		List<Missile> missiles=spaceship.getMissiles();
-		for(Missile missile : missiles) {
-			g2d.drawImage(missile.getImage(), missile.getX(), missile.getY(), this);
-		}
+		g.setColor(Color.white);
+		g.setFont(small);
+		g.drawString(msg, (B_WIDTH-fm.stringWidth(msg))/2, B_HEIGHT/2);
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		inGame();
+		
 		updateMIssiles();
 		updateSpaceship();
+		updateAliens();
 		
+		checkCollisions();
 		repaint();
+	}
+	
+	private void inGame() {
+		if(!ingame) {
+			timer.stop();
+		}
 	}
 	
 	private void updateMIssiles() {
@@ -127,7 +146,52 @@ public class Board extends JPanel implements ActionListener {
 	}
 	
 	private void updateSpaceship() {
-		spaceship.move();
+		if(spaceship.isVisible()) {
+			spaceship.move();			
+		}
+	}
+	
+	private void updateAliens() {
+		if(aliens.isEmpty()) {
+			ingame=false;
+			return;
+		}
+		
+		for(int i=0;i<aliens.size();i++) {
+			Alien a=aliens.get(i);
+			if(a.isVisible()) {
+				a.move();
+			} else {
+				aliens.remove(i);
+			}
+		}
+	}
+	
+	private void checkCollisions() {
+		Rectangle r3=spaceship.getBounds();
+		
+		for (Alien alien : aliens) {
+			Rectangle r2=alien.getBounds();
+			
+			if(r3.intersects(r2)) {
+				spaceship.setVisible(false);
+				alien.setVisible(false);
+				ingame=false;
+			}
+		}
+		
+		List<Missile> ms=spaceship.getMissiles();
+		for(Missile m : ms) {
+			Rectangle r1=m.getBounds();
+			for(Alien alien : aliens) {
+				Rectangle r2 = alien.getBounds();
+				//TODO This is not very efficient, must have better ways
+				if(r1.intersects(r2)) {
+					m.setVisible(false);
+					alien.setVisible(false);
+				}
+			}
+		}
 	}
 	
 	private class TAdapter extends KeyAdapter{
