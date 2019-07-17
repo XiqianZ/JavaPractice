@@ -9,6 +9,7 @@ package main;
  * 	 add a boss?
  *   change background?
  * 4. make alien shoot
+ * 5. add sound
  */
 public class Main {
 
