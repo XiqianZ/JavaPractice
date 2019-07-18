@@ -29,6 +29,12 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+/*
+ * TODO
+ * Make the border of each fragement picture disappear after mouse hangover
+ * Make a auto solver
+ */
+
 class MyButton extends JButton {
 	
 	private boolean isLastButton;
