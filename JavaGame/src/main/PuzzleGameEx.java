@@ -33,6 +33,7 @@ import javax.swing.JPanel;
  * TODO
  * Make the border of each fragement picture disappear after mouse hangover
  * Make a auto solver
+ * Just to see if that counts
  */
 
 class MyButton extends JButton {
