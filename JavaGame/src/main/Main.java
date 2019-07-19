@@ -10,6 +10,8 @@ package main;
  *   change background?
  * 4. make alien shoot
  * 5. add sound
+ * 6. add a screen shake effect
+ * 7. put all the game into a selection list on start screen
  */
 public class Main {
 
