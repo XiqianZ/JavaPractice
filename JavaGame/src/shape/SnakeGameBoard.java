@@ -13,6 +13,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -20,7 +21,7 @@ import javax.swing.Timer;
  * as the snake gainning size, the apple should become scatter, and eventually response
  * close to the edge of the board
  */
-public class SnakeGameBoard extends JPanel implements ActionListener {
+public class SnakeGameBoard extends JPanel implements Runnable {
 
 	private final int B_WIDTH=300;
 	private final int B_HEIGHT=300;
@@ -47,6 +48,8 @@ public class SnakeGameBoard extends JPanel implements ActionListener {
 	private Image apple;
 	private Image head;
 	
+	private Thread animator;
+	
 	public SnakeGameBoard() {
 		initBoard();
 	}
@@ -59,6 +62,13 @@ public class SnakeGameBoard extends JPanel implements ActionListener {
 		setPreferredSize(new Dimension(B_WIDTH, B_HEIGHT));
 		loadImages();
 		initGame();
+	}
+	
+	@Override
+	public void addNotify() {
+		super.addNotify();
+		animator = new Thread(this);
+		animator.start();
 	}
 	
 	private void loadImages() {
@@ -80,8 +90,7 @@ public class SnakeGameBoard extends JPanel implements ActionListener {
 		}
 		locateApple();
 		
-		timer = new Timer(DELAY, this);
-		timer.start();
+		
 	}
 	
 	@Override
@@ -162,9 +171,6 @@ public class SnakeGameBoard extends JPanel implements ActionListener {
 		if(x[0] < 0) {
 			inGame = false;
 		}
-		if(!inGame) {
-			timer.stop();
-		}
 	}
 	
 	private void locateApple() {
@@ -173,16 +179,6 @@ public class SnakeGameBoard extends JPanel implements ActionListener {
 		
 		r = (int) (Math.random()*RAND_POS);
 		apple_y = ((r*DOT_SIZE));
-	}
-	
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if(inGame) {
-			checkApple();
-			checkCollision();
-			move();
-		}
-		repaint();
 	}
 	
 	private class TAdapter extends KeyAdapter {
@@ -213,5 +209,38 @@ public class SnakeGameBoard extends JPanel implements ActionListener {
                 leftDirection = false;
             }
 		}
+	}
+
+	@Override
+	public void run() {
+		long beforeTime, timeDiff, sleep;
+		
+		beforeTime=System.currentTimeMillis();
+		
+		while(inGame) {
+			checkApple();
+			checkCollision();
+			move();
+			repaint();
+			
+			timeDiff = System.currentTimeMillis() - beforeTime;
+			sleep = DELAY - timeDiff;
+			
+			if(sleep<0) {
+				sleep = 2;
+			}
+			
+			try {
+				Thread.sleep(sleep);
+			} catch (InterruptedException e) {
+				String msg=String.format("Thread interrupted: %s", e.getMessage());
+				
+				JOptionPane.showMessageDialog(this, msg, "ERROR", JOptionPane.ERROR_MESSAGE);
+			}
+			beforeTime=System.currentTimeMillis();
+		}
+		
+		//Once inGame=false, paint the GameOver message and finish the thread
+		repaint();
 	}
 }
