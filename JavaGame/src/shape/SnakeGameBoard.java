@@ -22,7 +22,7 @@ import javax.swing.Timer;
  * close to the edge of the board
  */
 public class SnakeGameBoard extends JPanel implements Runnable {
-
+	//test
 	private final int B_WIDTH=300;
 	private final int B_HEIGHT=300;
 	private final int DOT_SIZE=10;
