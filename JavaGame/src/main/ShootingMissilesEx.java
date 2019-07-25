@@ -4,7 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 
-import shape.Board;
+import shape.SpaceShootingBoard;
 
 public class ShootingMissilesEx extends JFrame {
 	
@@ -13,7 +13,7 @@ public class ShootingMissilesEx extends JFrame {
 	}
 	
 	private void initUI() {
-		this.add(new Board());
+		this.add(new SpaceShootingBoard());
 		
 		this.setTitle("Shooting missiles");
 		this.setSize(400,300);

@@ -5,25 +5,22 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JPanel;
-import javax.swing.Timer;
 
-public class Board extends JPanel implements ActionListener {
-	
-	private Timer timer;
+public class SpaceShootingBoard extends JPanel implements Runnable {
+
 	private Spaceship spaceship;
 	private List<Alien> aliens;
 	private boolean ingame;
+	private Thread animator;
 	
 	private final int DELAY = 15;
 	private final int ICRAFT_X=40;
@@ -43,7 +40,7 @@ public class Board extends JPanel implements ActionListener {
 	        {820, 128}, {490, 170}, {700, 30}
 	};
 	
-	public Board() {
+	public SpaceShootingBoard() {
 		initBoard();
 	}
 	
@@ -56,9 +53,13 @@ public class Board extends JPanel implements ActionListener {
 		
 		spaceship = new Spaceship(ICRAFT_X,ICRAFT_Y);
 		initAliens();
-		
-		timer = new Timer(DELAY, this);
-		timer.start();
+	}
+	
+	@Override
+	public void addNotify() {
+		super.addNotify();
+		animator = new Thread(this);
+		animator.start();
 	}
 	
 	private void initAliens() {
@@ -115,24 +116,7 @@ public class Board extends JPanel implements ActionListener {
 		g.drawString(msg, (B_WIDTH-fm.stringWidth(msg))/2, B_HEIGHT/2);
 	}
 	
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		inGame();
-		
-		updateMIssiles();
-		updateSpaceship();
-		updateAliens();
-		
-		checkCollisions();
-		repaint();
-	}
-	
-	private void inGame() {
-		if(!ingame) {
-			timer.stop();
-		}
-	}
-	
+
 	private void updateMIssiles() {
 		List<Missile> missiles=spaceship.getMissiles();
 		for(int i=0;i<missiles.size();i++) {
@@ -204,6 +188,33 @@ public class Board extends JPanel implements ActionListener {
 		public void keyPressed(KeyEvent e) {
 			spaceship.keyPressed(e);
 		}
+	}
+
+	@Override
+	public void run() {
+		long beforeTime, timeDiff, cycle;
+		beforeTime=System.currentTimeMillis();
+		
+		while(ingame) {
+			checkCollisions();
+			updateSpaceship();
+			updateAliens();
+			updateMIssiles();
+			repaint();
+			
+			timeDiff = System.currentTimeMillis() - beforeTime;
+			cycle = DELAY - timeDiff;
+			if(cycle < 0) {
+				cycle=2;
+			}
+			try {
+				Thread.sleep(cycle);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			beforeTime = System.currentTimeMillis();
+		}
+		repaint();
 	}
 	
 }

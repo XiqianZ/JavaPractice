@@ -4,7 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 
-import shape.Board;
+import shape.SpaceShootingBoard;
 
 public class CollisionEx extends JFrame {
 
@@ -15,7 +15,7 @@ public class CollisionEx extends JFrame {
     
     private void initUI() {
         
-        add(new Board());
+        add(new SpaceShootingBoard());
         
         setResizable(false);
         pack();

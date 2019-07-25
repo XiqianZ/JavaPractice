@@ -7,20 +7,13 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.Timer;
 
-/*
- * as the snake gainning size, the apple should become scatter, and eventually response
- * close to the edge of the board
- */
 public class SnakeGameBoard extends JPanel implements Runnable {
 	//test
 	private final int B_WIDTH=300;
@@ -42,8 +35,7 @@ public class SnakeGameBoard extends JPanel implements Runnable {
 	private boolean upDirection = false;
 	private boolean downDirection = false;
 	private boolean inGame = true;
-	
-	private Timer timer;
+
 	private Image ball;
 	private Image apple;
 	private Image head;
@@ -213,7 +205,7 @@ public class SnakeGameBoard extends JPanel implements Runnable {
 
 	@Override
 	public void run() {
-		long beforeTime, timeDiff, sleep;
+		long beforeTime, timeDiff, cycle;
 		
 		beforeTime=System.currentTimeMillis();
 		
@@ -224,14 +216,14 @@ public class SnakeGameBoard extends JPanel implements Runnable {
 			repaint();
 			
 			timeDiff = System.currentTimeMillis() - beforeTime;
-			sleep = DELAY - timeDiff;
+			cycle = DELAY - timeDiff;
 			
-			if(sleep<0) {
-				sleep = 2;
+			if(cycle<0) {
+				cycle = 2;
 			}
 			
 			try {
-				Thread.sleep(sleep);
+				Thread.sleep(cycle);
 			} catch (InterruptedException e) {
 				String msg=String.format("Thread interrupted: %s", e.getMessage());
 				
