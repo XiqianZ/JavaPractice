@@ -1,7 +1,5 @@
-package main;
-
+package animation;
 
 public class SimpleVideoPlayer {
-
 
 }
