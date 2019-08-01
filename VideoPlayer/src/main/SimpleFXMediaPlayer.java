@@ -1,5 +1,10 @@
 package main;
 
+/**
+ * @author Xiqian
+ * This is JavaFX player using extends JFX's Application based on tutorial from internet
+ */
+
 import java.io.File;
 import java.net.URL;
 import javafx.application.Application;
