@@ -1,5 +1,8 @@
 package main;
 
+/**
+ * @author Xiqian
+ */
 import java.io.File;
 
 import javafx.application.Application;
@@ -33,7 +36,7 @@ import javafx.util.Pair;
 
 public class SimpleFXMediaPlayer2 extends Application {
 
-	//test
+	//
 	private final String FILE_URL = "resource/videos/testVideo1.mp4";
 	private Media media;
 	private MediaPlayer player;
