@@ -35,7 +35,7 @@ public class SimpleFXMediaPlayerFXPane {
 
 	private static void initSwingLater() {
 		JFrame jFrame = new JFrame("- JFrame -");
-		jFrame.setSize(540, 426);
+		jFrame.setSize(545, 426);
 		jFrame.setVisible(true);
 		jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jFrame.getContentPane().setLayout(null);
