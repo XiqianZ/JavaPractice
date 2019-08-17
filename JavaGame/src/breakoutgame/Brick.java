@@ -25,7 +25,7 @@ public class Brick extends Sprite {
 		image = ii.getImage();
 	}
 	
-	public boolean isDestoryed() {
+	public boolean isDestroyed() {
 		return this.destroyed;
 	}
 	

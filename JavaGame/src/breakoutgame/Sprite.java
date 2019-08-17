@@ -34,6 +34,10 @@ public class Sprite {
 	protected int getImageHeight() {
 		return imageHeight;
 	}
+	
+	protected Image getImage() {
+		return this.image;
+	}
 
 	protected Rectangle getRect() {
 		return new Rectangle(x,y,image.getWidth(null), image.getHeight(null));

@@ -1,6 +1,6 @@
 package breakoutgame;
 
-public interface BreakoutCommonValues {
+public interface Commons {
 	
 	public static final int WIDTH = 300;
 	public static final int HEIGHT = 400;

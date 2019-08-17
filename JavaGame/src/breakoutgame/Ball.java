@@ -2,7 +2,7 @@ package breakoutgame;
 
 import javax.swing.ImageIcon;
 
-public class Ball extends Sprite implements BreakoutCommonValues{
+public class Ball extends Sprite implements Commons{
 
 	private int xdir;
 	private int ydir;
