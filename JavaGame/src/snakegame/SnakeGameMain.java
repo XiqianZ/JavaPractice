@@ -1,16 +1,14 @@
-package main;
+package snakegame;
 
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 
-import shape.SnakeGameBoard;
-
 /*
  * 1. game animation seems a bit clumsy, make it more smooth
  */
-public class SnakeGame extends JFrame {
-	public SnakeGame() {
+public class SnakeGameMain extends JFrame {
+	public SnakeGameMain() {
 		init();
 	}
 	
@@ -27,7 +25,7 @@ public class SnakeGame extends JFrame {
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(() -> {
-            JFrame ex = new SnakeGame();
+            JFrame ex = new SnakeGameMain();
             ex.setVisible(true);
         });
 	}
