@@ -35,7 +35,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.util.Pair;
 
-public class SimpleFXMediaPlayer2 extends Application {
+public class FXMediaPlayerTemplate extends Application {
 
 	//
 	private final String FILE_URL = "resource/videos/testVideo1.mp4";
@@ -48,6 +48,8 @@ public class SimpleFXMediaPlayer2 extends Application {
 	private VBox root;
 	private GridPane digiPane;
 
+	private Slider timeSlider;
+	
 	private TextArea messageArea;
 
 	public static void main(String[] args) {
@@ -77,7 +79,6 @@ public class SimpleFXMediaPlayer2 extends Application {
 		});
 		
 
-
 		player.statusProperty().addListener(new ChangeListener<MediaPlayer.Status>() {
 			@Override
 			public void changed(ObservableValue<? extends Status> ob, final MediaPlayer.Status oldStatus,
@@ -86,6 +87,12 @@ public class SimpleFXMediaPlayer2 extends Application {
 
 			}
 
+		});
+		
+		player.currentTimeProperty().addListener((obs, oldTime, newTime) ->{
+			if(!getTimeSlider().isValueChanging()) {
+				getTimeSlider().setValue(newTime.toSeconds()/player.getMedia().getDuration().toSeconds()*100);
+			}
 		});
 
 		//Gather metadata stored with the media and display
@@ -173,32 +180,28 @@ public class SimpleFXMediaPlayer2 extends Application {
 
 	private HBox getControlBox() {
 		if (controlBox == null) {
-			controlBox = new HBox(5, createPlayButton(), createPauseButton(), createTimeSlider());
+			controlBox = new HBox(5, createPlayButton(), createPauseButton(), getTimeSlider());
 			controlBox.setAlignment(Pos.CENTER);
 		}
 		return controlBox;
 	}
 	
-	private Slider createTimeSlider() {
-		Slider timeSlider = new Slider();
+	private Slider getTimeSlider() {
+		if(timeSlider == null) {
+			timeSlider = new Slider();
 //		timeSlider.setPrefWidth();
-
-		timeSlider.setMaxWidth(Double.MAX_VALUE);
-		timeSlider.valueProperty().addListener(new InvalidationListener() { 
-            public void invalidated(Observable ov) 
-            { 
-                if (timeSlider.isPressed()) {
-                    player.seek(player.getMedia().getDuration().multiply(timeSlider.getValue()/100)); 
-                    getMessageArea().appendText("\nTimeslider value is: " + timeSlider.getValue());
-                } 
-            } 
-        }); 
-		
-		player.currentTimeProperty().addListener((obs, oldTime, newTime) ->{
-			if(!timeSlider.isValueChanging()) {
-				timeSlider.setValue(newTime.toSeconds()/player.getMedia().getDuration().toSeconds()*100);
-			}
-		});
+			
+			timeSlider.setMaxWidth(Double.MAX_VALUE);
+			timeSlider.valueProperty().addListener(new InvalidationListener() { 
+				public void invalidated(Observable ov) 
+				{ 
+					if (timeSlider.isPressed()) {
+						player.seek(player.getMedia().getDuration().multiply(timeSlider.getValue()/100)); 
+						getMessageArea().appendText("\nTimeslider value is: " + timeSlider.getValue());
+					} 
+				} 
+			}); 			
+		}
 		
 		return timeSlider;
 		
