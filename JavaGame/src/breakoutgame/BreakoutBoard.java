@@ -20,6 +20,10 @@ public class BreakoutBoard extends JPanel implements Commons, Runnable{
 	private Brick bricks[];
 	private boolean inGame = true;
 	
+	private int destroiedBrickNum = 0;
+	
+	private Thread animator;
+	
 	public BreakoutBoard() {
 		initBoard();
 	}
@@ -35,6 +39,8 @@ public class BreakoutBoard extends JPanel implements Commons, Runnable{
 	public void addNotify() {
 		super.addNotify();
 		gameInit();
+		animator = new Thread(this);
+		animator.run();
 	}
 	
 	private void gameInit() {
@@ -51,6 +57,10 @@ public class BreakoutBoard extends JPanel implements Commons, Runnable{
 				k++;
 			}
 		}
+	}
+	
+	private void resetGame() {
+		//TODO
 	}
 	
 	@Override 
@@ -108,8 +118,6 @@ public class BreakoutBoard extends JPanel implements Commons, Runnable{
 		inGame = false;
 	}
 	
-	
-	
 	@Override
 	public void run() {
 		long beforeTime, timeDiff, cycle;
@@ -139,6 +147,39 @@ public class BreakoutBoard extends JPanel implements Commons, Runnable{
 	}
 	
 	private void checkCollision() {
+		if(destroiedBrickNum == bricks.length) {
+			message = "You win!";
+			stopGame();
+		}
+		
+		if(ball.getRect().getBounds2D().getMaxY()<Commons.BOTTOM_EDGE) {
+			stopGame();
+		}
+		
+		if(ball.getRect().intersects(paddle.getRect())) {
+			
+			int paddleLPos = (int) paddle.getRect().getMinX();
+			int ballLPos = (int) ball.getRect().getMinX();
+			
+			int first = paddleLPos + 8;
+			int second = paddleLPos + 16;
+			int third = paddleLPos + 24;
+			int fourth = paddleLPos + 32;
+			
+			ball.setXDir(-1);
+
+			if(ballLPos < first) {
+				
+			} else if(ballLPos < second) {
+				
+			} else if(ballLPos < third) {
+				
+			} else {
+				
+			}
+			
+		}
+		
 		
 	}
 
