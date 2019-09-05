@@ -27,6 +27,7 @@ public class Breakout {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(() ->{
 			Breakout game = new Breakout();
+			
 		});
 	}
 }
