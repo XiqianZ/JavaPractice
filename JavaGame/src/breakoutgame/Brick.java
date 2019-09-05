@@ -29,7 +29,7 @@ public class Brick extends Sprite {
 		return this.destroyed;
 	}
 	
-	public void setDestoyed(boolean val) {
+	public void setDestroyed(boolean val) {
 		destroyed = val;
 	}
 }
