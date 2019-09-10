@@ -14,8 +14,9 @@ public class Breakout {
 	
 	private void initUI() {
 		jf = new JFrame();
-		jf.add(new BreakoutBoard());
 		jf.setTitle("breakout");
+//		jf.add(new BreakoutBoard());
+		jf.add(new BreakoutBoardTimer());
 		
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jf.setSize(Commons.WIDTH, Commons.HEIGHT);

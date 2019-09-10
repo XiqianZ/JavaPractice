@@ -32,14 +32,13 @@ public class BreakoutBoard extends JPanel implements Commons, Runnable{
 	private void initBoard() {
 		addKeyListener(new TAdapter());
 		setFocusable(true);
-		
 		bricks = new Brick[N_OF_BRICKS];
+		gameInit();
 	}
 	
 	@Override
 	public void addNotify() {
 		super.addNotify();
-		gameInit();
 		animator = new Thread(this);
 		animator.run();
 	}
@@ -60,9 +59,6 @@ public class BreakoutBoard extends JPanel implements Commons, Runnable{
 		}
 	}
 	
-	private void resetGame() {
-		//TODO
-	}
 	
 	@Override 
 	public void paintComponent(Graphics g) {
@@ -131,7 +127,7 @@ public class BreakoutBoard extends JPanel implements Commons, Runnable{
 			cycle = Commons.PERIOD - timeDiff;
 			
 			if(cycle<0) {
-				cycle = 0;
+				cycle = 2;
 			} 
 			
 			try {
@@ -149,7 +145,7 @@ public class BreakoutBoard extends JPanel implements Commons, Runnable{
 		ball.move();
 		paddle.move();
 		checkCollision();
-		repaint();
+		this.repaint();
 	}
 	
 	private void checkCollision() {
