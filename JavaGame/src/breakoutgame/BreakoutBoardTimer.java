@@ -16,7 +16,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class BreakoutBoardTimer extends JPanel {
+public class BreakoutBoardTimer extends JPanel implements Runnable {
 
     private Timer timer;
     private String message = "Game Over";
@@ -24,11 +24,20 @@ public class BreakoutBoardTimer extends JPanel {
     private Paddle paddle;
     private Brick[] bricks;
     private boolean inGame = true;
+    
+    private Thread animator;
 
     public BreakoutBoardTimer() {
 
         initBoard();
     }
+    
+	@Override
+	public void addNotify() {
+		super.addNotify();
+		animator = new Thread(this);
+		animator.run();
+	}
 
     private void initBoard() {
 
@@ -251,4 +260,32 @@ public class BreakoutBoardTimer extends JPanel {
             }
         }
     }
+
+	@Override
+	public void run() {
+		long beforeTime, timeDiff, cycle;
+		beforeTime = System.currentTimeMillis();
+		
+		while(inGame) {
+			
+			doGameCycle();
+			
+			timeDiff = System.currentTimeMillis() - beforeTime;
+			cycle = Commons.PERIOD - timeDiff;
+			
+			if(cycle<0) {
+				cycle = 2;
+			} 
+			
+			try {
+				Thread.sleep(cycle);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			
+			beforeTime = System.currentTimeMillis();
+		}
+		repaint();
+		
+	}
 }

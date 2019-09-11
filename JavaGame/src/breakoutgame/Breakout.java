@@ -23,6 +23,7 @@ public class Breakout {
 		jf.setLocationRelativeTo(null);
 		jf.setResizable(false);
 		jf.setVisible(true);
+		System.out.println("Where is my JFrame");
 	}
 	
 	public static void main(String[] args) {

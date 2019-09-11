@@ -1,6 +1,7 @@
 package breakoutgame;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
@@ -32,6 +33,7 @@ public class BreakoutBoard extends JPanel implements Commons, Runnable{
 	private void initBoard() {
 		addKeyListener(new TAdapter());
 		setFocusable(true);
+		setPreferredSize(new Dimension(Commons.WIDTH, Commons.HEIGHT));
 		bricks = new Brick[N_OF_BRICKS];
 		gameInit();
 	}
@@ -63,6 +65,7 @@ public class BreakoutBoard extends JPanel implements Commons, Runnable{
 	@Override 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		
 		Graphics2D g2d = (Graphics2D) g;
 		
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -119,6 +122,7 @@ public class BreakoutBoard extends JPanel implements Commons, Runnable{
 	public void run() {
 		long beforeTime, timeDiff, cycle;
 		beforeTime = System.currentTimeMillis();
+		
 		while(inGame) {
 			
 			doGameCycle();
@@ -138,13 +142,13 @@ public class BreakoutBoard extends JPanel implements Commons, Runnable{
 			
 			beforeTime = System.currentTimeMillis();
 		}
-//		drawGameOver();
+		repaint();
 	}
 	
 	private void doGameCycle() {
 		ball.move();
 		paddle.move();
-		checkCollision();
+//		checkCollision();
 		this.repaint();
 	}
 	

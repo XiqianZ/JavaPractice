@@ -80,9 +80,7 @@ public class SnakeGameBoard extends JPanel implements Runnable {
 			x[z] = 50-z*10;
 			y[z] = 50;
 		}
-		locateApple();
-		
-		
+		locateApple();	
 	}
 	
 	@Override
