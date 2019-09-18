@@ -19,13 +19,13 @@ public class SevenScaleQuestionnaireUI {
 
 	private static String emotionTag = "N/A";
 	private static String touchPatternTag = "N/A";
-	private static String titleString = "ERICA‚É‚æ‚éu" + emotionTag + "vŠ´î‚Ì•\Œ»‚ÉŠÖ‚·‚éƒAƒ“ƒP[ƒg‚É‚¨“š‚¦‚­‚¾‚³‚¢";
+	private static String titleString = "ERICAâ€š current emotion" + emotionTag + "in play";
 	
-	private static String strengthTitleString = "•\î‚Æ”­˜b‚Ì‚İ‚É‚æ‚éŠ´î•\Œ»‚É”ä‚×‚ÄC¡‰ñ‚ÌŠ´î•\Œ»‚©‚ç“`‚í‚Á‚½ERICA‚ÌŠ´î‚Ì“x‡‚¢‚Í";
+	private static String strengthTitleString = "strength";
 	
-	private static String naturenessTitleString = "ERICA‚ÌG‚ê•û‚ÍCŠ´î‚ğ•\Œ»‚·‚éã‚Å";
+	private static String naturenessTitleString = "ERICA";
 	
-	private static String friendlinessTitleString = "•\î‚Æ”­˜b‚Ì‚İ‚É‚æ‚éŠ´î•\Œ»‚É”ä‚×‚ÄC¡‰ñ‚ÌŠ´î•\Œ»‚©‚ç“`‚í‚ée‚µ‚İ‚Ì“x‡‚¢‚Í";
+	private static String friendlinessTitleString = "test friendliness title text";
 	
 	private static String readyString = "Ready?";
 	private static String continueString = "Continue";
@@ -35,31 +35,31 @@ public class SevenScaleQuestionnaireUI {
 	private static int subTitleFontSize = 20;
 	
 	private static ButtonGroup strengthButtonGroup = new ButtonGroup();
-	private static JRadioButton strengthN3 = createScoreButton("<html><p align=\"center\">-3 <br> ‚Æ‚Ä‚àã‚¢</p></html>", strengthButtonGroup);
+	private static JRadioButton strengthN3 = createScoreButton("<html><p align=\"center\">-3 <br> â€šÃ†â€šÃ„â€šÃ Å½Ã£â€šÂ¢</p></html>", strengthButtonGroup);
 	private static JRadioButton strengthN2 = createScoreButton("<html><p align=\"center\">-2 <br> &nbsp  </p></html>", strengthButtonGroup);
 	private static JRadioButton strengthN1 = createScoreButton("<html><p align=\"center\">-1 <br> &nbsp  </p></html>", strengthButtonGroup);
-	private static JRadioButton strengthZero = createScoreButton("<html><p align=\"center\">0 <br> “¯‚¶’ö“x</p></html>", strengthButtonGroup);
+	private static JRadioButton strengthZero = createScoreButton("<html><p align=\"center\">0 <br> â€œÂ¯â€šÂ¶â€™Ã¶â€œx</p></html>", strengthButtonGroup);
 	private static JRadioButton strengthP1 = createScoreButton("<html><p align=\"center\">1 <br> &nbsp  </p></html>", strengthButtonGroup);
 	private static JRadioButton strengthP2 = createScoreButton("<html><p align=\"center\">2 <br> &nbsp  </p></html>", strengthButtonGroup);
-	private static JRadioButton strengthP3 = createScoreButton("<html><p align=\"center\">3 <br> ‚Æ‚Ä‚à‹­‚¢</p></html>", strengthButtonGroup);
+	private static JRadioButton strengthP3 = createScoreButton("<html><p align=\"center\">3 <br> â€šÃ†â€šÃ„â€šÃ â€¹Â­â€šÂ¢</p></html>", strengthButtonGroup);
 	
 	private static ButtonGroup naturenessButtonGroup = new ButtonGroup();
-	private static JRadioButton naturenessN3 = createScoreButton("<html><p align=\"center\">-3 <br> ‚Æ‚Ä‚à•s©‘R</p></html>",naturenessButtonGroup);
+	private static JRadioButton naturenessN3 = createScoreButton("<html><p align=\"center\">-3 <br> â€šÃ†â€šÃ„â€šÃ â€¢sÅ½Â©â€˜R</p></html>",naturenessButtonGroup);
 	private static JRadioButton naturenessN2 = createScoreButton("<html><p align=\"center\">-2 <br> &nbsp  </p></html>",naturenessButtonGroup);
 	private static JRadioButton naturenessN1 = createScoreButton("<html><p align=\"center\">-1 <br> &nbsp  </p></html>",naturenessButtonGroup);
-	private static JRadioButton naturenessZero = createScoreButton("<html><p align=\"center\">0 <br> ‚Ç‚¿‚ç‚Å‚à‚È‚¢</p></html>",naturenessButtonGroup);
+	private static JRadioButton naturenessZero = createScoreButton("<html><p align=\"center\">0 <br> â€šÃ‡â€šÂ¿â€šÃ§â€šÃ…â€šÃ â€šÃˆâ€šÂ¢</p></html>",naturenessButtonGroup);
 	private static JRadioButton naturenessP1 = createScoreButton("<html><p align=\"center\">1 <br> &nbsp  </p></html>",naturenessButtonGroup);
 	private static JRadioButton naturenessP2 = createScoreButton("<html><p align=\"center\">2 <br> &nbsp  </p></html>",naturenessButtonGroup);
-	private static JRadioButton naturenessP3 = createScoreButton("<html><p align=\"center\">3 <br> ‚Æ‚Ä‚à©‘R</p></html>",naturenessButtonGroup);
+	private static JRadioButton naturenessP3 = createScoreButton("<html><p align=\"center\">3 <br> â€šÃ†â€šÃ„â€šÃ Å½Â©â€˜R</p></html>",naturenessButtonGroup);
 	
 	private static ButtonGroup friendlinessButtonGroup = new ButtonGroup();
-	private static JRadioButton friendN3 = createScoreButton("<html><p align=\"center\">-3 <br> ‚Æ‚Ä‚àã‚¢</p></html>",friendlinessButtonGroup);
+	private static JRadioButton friendN3 = createScoreButton("<html><p align=\"center\">-3 <br> â€šÃ†â€šÃ„â€šÃ Å½Ã£â€šÂ¢</p></html>",friendlinessButtonGroup);
 	private static JRadioButton friendN2 = createScoreButton("<html><p align=\"center\">-2 <br> &nbsp  </p></html>",friendlinessButtonGroup);
 	private static JRadioButton friendN1 = createScoreButton("<html><p align=\"center\">-1 <br> &nbsp  </p></html>",friendlinessButtonGroup);
-	private static JRadioButton friendZero = createScoreButton("<html><p align=\"center\">0 <br> “¯‚¶’ö“x</p></html>",friendlinessButtonGroup);
+	private static JRadioButton friendZero = createScoreButton("<html><p align=\"center\">0 <br> â€œÂ¯â€šÂ¶â€™Ã¶â€œx</p></html>",friendlinessButtonGroup);
 	private static JRadioButton friendP1 = createScoreButton("<html><p align=\"center\">1 <br> &nbsp  </p></html>",friendlinessButtonGroup);
 	private static JRadioButton friendP2 = createScoreButton("<html><p align=\"center\">2 <br> &nbsp  </p></html>",friendlinessButtonGroup);
-	private static JRadioButton friendP3 = createScoreButton("<html><p align=\"center\">3 <br> ‚Æ‚Ä‚à‹­‚¢</p></html>",friendlinessButtonGroup);
+	private static JRadioButton friendP3 = createScoreButton("<html><p align=\"center\">3 <br> â€šÃ†â€šÃ„â€šÃ â€¹Â­â€šÂ¢</p></html>",friendlinessButtonGroup);
 	
 	private static JButton continueButton = new JButton(readyString);
 	static JLabel titleLabel = new JLabel(titleString);
@@ -236,7 +236,7 @@ public class SevenScaleQuestionnaireUI {
 	static void setTags() {
 //		emotionTag = InteractionManager_ForExperiment.getEmotionTag();
 //		touchPatternTag = InteractionManager_ForExperiment.getGestureTag();
-		titleString = "ERICA‚É‚æ‚éu" + emotionTag + "vŠ´î‚Ì•\Œ»‚ÉŠÖ‚·‚éƒAƒ“ƒP[ƒg‚É‚¨“š‚¦‚­‚¾‚³‚¢";
+		titleString = "ERICAâ€šÃ‰â€šÃ¦â€šÃ©ï¿½u" + emotionTag + "test emotion";
 		titleLabel.setText(titleString);
 	}
 	
